@@ -3,8 +3,6 @@ package com.myclass.repository.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,16 +10,16 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.myclass.dto.UserDto;
 import com.myclass.entity.User;
 import com.myclass.repository.UserRepository;
 
 @Repository
-@Transactional(rollbackOn = Exception.class)
 public class UserRepositoryImpl implements UserRepository {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-
+	
 	public List<User> findAll() {
 
 		List<User> list = new ArrayList<User>();
@@ -92,4 +90,15 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 		return list;
 	}
+	
+	public List<UserDto> findAllWithRole(){
+		List<UserDto> list = new ArrayList<UserDto>();
+		String strQuery = "SELECT new com.myclass.dto.UserDto(u.id,u.fullname,u.email,r.description) FROM User u JOIN Role r on u.roleId=r.id";
+		
+		Session session = sessionFactory.getCurrentSession();
+		Query<UserDto> query = session.createQuery(strQuery);
+		list = query.getResultList();
+		return list;
+	}
+	
 }

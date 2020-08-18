@@ -25,24 +25,32 @@ public class User {
 	@NotBlank
 	@Email
 	private String email;
-	@Length(min = 8,max = 20)
+	@Length(min = 8, max = 20)
 	private String password;
-	@Length(min = 8,max = 20)
-    @Pattern(regexp = "^[a-zA-Z0-9.\\-\\/+=@_ ]*$")
+	@Length(min = 8, max = 20)
+	@Pattern(regexp = "^[a-zA-Z0-9.\\-\\/+=@_ ]*$")
 	private String fullname;
 	private String avatar;
-	
+
 	@Column(name = "role_id")
 	private int roleId;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "role_id", insertable = false, updatable = false)
 	private Role role;
-	
-	public User() {}
 
-	public User(int id, String email, String password, String fullname, String avatar,
-			int roleId) {
+	public User() {
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public User(int id, String email, String password, String fullname, String avatar, int roleId) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -63,7 +71,7 @@ public class User {
 	public String getEmail() {
 		return email;
 	}
-
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -91,7 +99,7 @@ public class User {
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
-
+	
 	public int getRoleId() {
 		return roleId;
 	}

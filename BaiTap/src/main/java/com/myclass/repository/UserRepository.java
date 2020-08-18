@@ -2,17 +2,11 @@ package com.myclass.repository;
 
 import java.util.List;
 
+import com.myclass.dto.UserDto;
 import com.myclass.entity.User;
 
-public interface UserRepository {
+public interface UserRepository extends GenericRepository<User, Integer> {
 	
-	public List<User> findAll();
-
-	public User findById(int id);
-
-	public void saveOrUpdate(User user);
-
-	public void delete(int id);
-
-	public List<User> search(String keyword);
+	
+	List<UserDto> findAllWithRole();
 }

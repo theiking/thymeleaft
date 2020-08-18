@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="/layout/default">
+<head>
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="pcoded-content" layout:fragment="noidung">
+		<div class="pcoded-inner-content">
+			<!-- Main-body start -->
+			<div class="main-body">
+				<div class="page-body">
+					<div class="row">
+						<div class="col-md-12 mb-2">
+							<div class="page-header-breadcrumb">
+								<ul class="breadcrumb-title">
+									<li class="breadcrumb-item"><a href="/admin"> <i
+											class="feather icon-home"></i> Trang chủ
+									</a></li>
+									<li class="breadcrumb-item"><a href="#!">Chỉnh sửa tài
+											khoản</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="card">
+								<div class="card-header">
+									<h2 class="text-uppercase text-center">Chỉnh sửa tài khoản</h2>
+								</div>
+								<div class="card-block">
+									<form method="post" th:action="@{/user/edit}"
+										th:object="${user}">
+										<div class="row">
+											<div class="col-md-6">
+											<input type="hidden" th:field="*{id}"
+														class="form-control" />
+												<div class="form-group">
+													<label>Email</label> <input type="text" th:field="*{email}"
+														class="form-control" /> <span class="text-danger"
+														th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+												</div>
+												<div class="form-group">
+													<label>Mật khẩu</label> <input type="password"
+														th:field="*{password}" class="form-control" /> <span
+														class="text-danger"
+														th:if="${#fields.hasErrors('password')}"
+														th:errors="*{password}"></span>
+
+												</div>
+												<div class="form-group">
+													<label>Họ tên</label> <input type="text"
+														th:field="*{fullname}" class="form-control" /> <span
+														class="text-danger"
+														th:if="${#fields.hasErrors('fullname')}"
+														th:errors="*{fullname}"></span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Loại người dùng</label> <select class="form-control"
+														th:field="*{roleId}">
+														<option th:each="item : ${roles}" th:value="${item.id}"
+															th:text="${item.description}"></option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Avatar</label> <input type="text"
+														th:field="*{avatar}" class="form-control">
+												</div>
+											</div>
+											<div class="col-12 mt-3">
+												<button type="submit" class="btn btn-success">Lưu
+													lại</button>
+												<a class="btn btn-secondary" th:href="@{/user}">Quay lại</a>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

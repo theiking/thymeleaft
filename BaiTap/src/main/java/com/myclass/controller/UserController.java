@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.myclass.entity.User;
 import com.myclass.repository.RoleRepository;
 import com.myclass.repository.UserRepository;
+import com.myclass.service.UserService;
 
 @Controller
 @RequestMapping("/user")
@@ -24,10 +25,13 @@ public class UserController {
 	
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String index(ModelMap model) {
-		model.addAttribute("users", userRepository.findAll());
+		model.addAttribute("users", userService.getAll());
 		model.addAttribute("roles", roleRepository.findAll());
 		return "user/index";
 	}
@@ -68,17 +72,17 @@ public class UserController {
 	public String editpost(ModelMap model, @Validated @ModelAttribute ("user") User user, BindingResult errors ) {
 		
 		if(errors.hasErrors()) {
-			return "redirect:/user/edit?id="+user.getId();
+			return "user/edit";
 		}
 		try {
 			userRepository.saveOrUpdate(user);
 			
 			return "redirect:/user";
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 		model.addAttribute("message", "Chỉnh sửa thất bại!");
-		return "redirect:/user/edit?id="+user.getId();
+		return "user/edit";
 	}
 	
 	

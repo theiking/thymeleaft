@@ -2,6 +2,7 @@ eclipse.preferences.version=1
 encoding//src/main/java/com/myclass/controller/RoleController.java=UTF-8
 encoding//src/main/java/com/myclass/controller/UserController.java=UTF-8
 encoding//src/main/java/com/myclass/entity/Role.java=UTF-8
+encoding//src/main/java/com/myclass/repository/impl/GenericRepositoryImpl.java=UTF-8
 encoding//src/main/java/com/myclass/repository/impl/RoleRepositoryImpl.java=UTF-8
 encoding//src/main/java/com/myclass/repository/impl/UserRepositoryImpl.java=UTF-8
 encoding//src/main/resources/message.properties=UTF-8

@@ -53,7 +53,7 @@
 													<td th:text="${item.id}"></td>
 													<td th:text="${item.fullname}"></td>
 													<td th:text="${item.email}"></td>
-													<td> </td>
+													<td th:text="${item.roleName}"></td>
 													<td><a th:href="@{/user/edit(id=${item.id})}"
 														class="btn btn-sm btn-info"> <i
 															class="fa fa-pencil-square-o"></i>
